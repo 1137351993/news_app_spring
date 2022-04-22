@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.IAttentionDao">
+    <resultMap id="Map" type="com.example.demo.entity.Attention"></resultMap>
+
+    <insert id="push" parameterType="com.example.demo.entity.Attention">
+        insert into attention (id, account, package_id)
+        values(#{id},#{account},#{package_id})
+    </insert>
+
+</mapper>

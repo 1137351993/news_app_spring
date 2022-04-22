@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.IInternational_newsDao">
+    <resultMap id="Map" type="com.example.demo.entity.International_news"></resultMap>
+    <insert id="push" parameterType="com.example.demo.entity.International_news">
+        insert into international_news (id, source, title, news_url, datetime, img_url_1, img_url_2, img_url_3)
+        values(#{id},#{source},#{title},#{news_url},#{datetime},#{img_url_1},#{img_url_2},#{img_url_3})
+    </insert>
+
+    <update id="push_content" parameterType="com.example.demo.entity.International_news">
+        update international_news set content=#{content} where id=#{id}
+    </update>
+
+    <select id="pull" resultMap="Map" parameterType="com.example.demo.entity.International_news">
+        select id,source,title,datetime,img_url_1,img_url_2,img_url_3 from international_news order by datetime limit #{page},10
+    </select>
+
+    <select id="pull_content" resultMap="Map" parameterType="com.example.demo.entity.International_news">
+        select id,source,title,datetime,content from international_news where id=#{id}
+    </select>
+
+    <select id="pull_title" resultMap="Map" parameterType="com.example.demo.entity.International_news">
+        select id,source,title,datetime,img_url_1,img_url_2,img_url_3 from international_news where id=#{id}
+    </select>
+</mapper>

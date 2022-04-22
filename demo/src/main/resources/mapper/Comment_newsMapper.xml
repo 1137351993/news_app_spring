@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.IComment_newsDao">
+    <resultMap id="Map" type="com.example.demo.entity.Comment_news"></resultMap>
+
+    <insert id="push" parameterType="com.example.demo.entity.Comment_news">
+        insert into comment_news (user_name, id, content)
+        values(#{user_name},#{id},#{content})
+    </insert>
+
+    <select id="init" resultMap="Map" parameterType="com.example.demo.entity.Comment_news">
+        select * from comment_news where id=#{id}
+    </select>
+
+</mapper>
