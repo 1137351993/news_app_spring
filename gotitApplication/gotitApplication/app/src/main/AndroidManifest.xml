@@ -16,6 +16,7 @@
         <activity android:name=".MainActivity2"></activity>
         <activity android:name=".users.PersonInfo"></activity>
         <activity android:name=".news_list"></activity>
+        <activity android:name=".attention.attention"></activity>
         <activity
             android:name=".login.login"
             android:exported="true">

@@ -37,6 +37,7 @@ android {
                             'src/main/res/drawables/login',
                             'src/main/res/drawables/selector',
                             'src/main/res/drawables/users',
+                            'src/main/res/drawables/temp',
                             'src/main/res/drawables',
 
                             'src/main/res/layouts/home',
@@ -44,6 +45,7 @@ android {
                             'src/main/res/layouts/fragment',
                             'src/main/res/layouts/users',
                             'src/main/res/layouts/news_list',
+                            'src/main/res/layouts/attention',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]

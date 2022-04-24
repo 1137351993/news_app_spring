@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.gotitapplication.R;
+import com.example.gotitapplication.attention.attention;
 import com.example.gotitapplication.login.login;
 import com.example.gotitapplication.news_list;
 
@@ -67,7 +68,7 @@ public class PersonalFragment extends Fragment {
             }
         });
 
-
+        //历史记录
         button_history.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -78,12 +79,12 @@ public class PersonalFragment extends Fragment {
             }
         });
 
+        //关注
         button_attention.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getActivity(), news_list.class);
+                Intent intent = new Intent(getActivity(), attention.class);
                 intent.putExtra("account", account);
-                intent.putExtra("operationName", 2);
                 startActivity(intent);
             }
         });
