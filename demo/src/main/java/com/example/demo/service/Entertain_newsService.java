@@ -35,7 +35,7 @@ public class Entertain_newsService {
 
     public Entertainment_news[] pull_history(String account){ return ientertainment_newsDao.pull_history(account);}
 
-    public Entertainment_news[] pull_attention(String account){ return ientertainment_newsDao.pull_attention(account);}
+    public Entertainment_news[] pull_attention(int package_id){ return ientertainment_newsDao.pull_attention(package_id);}
 
     public Entertainment_news[] pull_select(String key){ return ientertainment_newsDao.pull_select(key);}
 

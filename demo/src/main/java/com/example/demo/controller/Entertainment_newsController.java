@@ -46,7 +46,7 @@ public class Entertainment_newsController {
     private Entertainment_news[] pull_history(@RequestParam String account) { return entertain_newsService.pull_history(account); }
 
     @RequestMapping(value="/pull_attention", method = RequestMethod.POST)
-    private Entertainment_news[] pull_attention(@RequestParam String account) { return entertain_newsService.pull_attention(account); }
+    private Entertainment_news[] pull_attention(@RequestParam int package_id) { return entertain_newsService.pull_attention(package_id); }
 
     @RequestMapping(value="/pull_select", method = RequestMethod.POST)
     private Entertainment_news[] pull_select(@RequestParam String key) { return entertain_newsService.pull_select(key); }

@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Attention;
-import com.example.demo.entity.Entertainment_news;
-import com.example.demo.entity.History;
-import com.example.demo.entity.Users;
+import com.example.demo.entity.*;
 import com.example.demo.service.AttentionService;
 import com.example.demo.service.Entertain_newsService;
 import com.example.demo.service.HistoryService;
@@ -22,8 +19,10 @@ public class AttentionController {
         attentionService.push(attention.getId(), attention.getAccount(), attention.getPackage_id());
     }
 
-    @RequestMapping(value = "/pull", method = RequestMethod.POST)
-    private void pull(@RequestParam String account){
-
+    @RequestMapping(value = "/pull_package", method = RequestMethod.POST)
+    private Attention_package[] pull_package(@RequestParam String account){
+       return attentionService.pull_package(account);
     }
+
+
 }

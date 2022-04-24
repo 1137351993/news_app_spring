@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-public class attention_package {
+public class Attention_package {
     private int package_id;
     private String name;
     private String account;

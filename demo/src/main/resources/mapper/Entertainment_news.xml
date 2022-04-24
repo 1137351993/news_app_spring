@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.dao.IEntertainment_newsDao">
+    <resultMap id="Map" type="com.example.demo.entity.Entertainment_news"></resultMap>
+    <resultMap id="Map_tag" type="com.example.demo.entity.Tag"></resultMap>
     <insert id="push" parameterType="com.example.demo.entity.Entertainment_news">
-        insert into entertainment_news(id,source,title,news_url,datetime,img_url_1,img_url_2,img_url_3)
-         values(#{id},#{source},#{title},#{news_url},#{datetime},#{img_url_1},#{img_url_2},#{img_url_3})
+        insert into entertainment_news (id, source, title, news_url, datetime, img_url_1, img_url_2, img_url_3)
+        values(#{id},#{source},#{title},#{news_url},#{datetime},#{img_url_1},#{img_url_2},#{img_url_3})
     </insert>
+
     <update id="push_content" parameterType="com.example.demo.entity.Entertainment_news">
         update entertainment_news set content=#{content} where id=#{id}
     </update>
-    <select id="pull_all" resultType="com.example.demo.entity.Tag" parameterType="com.example.demo.entity.Tag">
-        SELECT id,tag1,tag1_weight,tag2,tag2_weight,tag3,tag3_weight,tag4,tag4_weight,tag5,tag5_weight,
+
+    <select id="pull" resultMap="Map" parameterType="com.example.demo.entity.Entertainment_news">
+        select id,source,title,datetime,img_url_1,img_url_2,img_url_3 from entertainment_news order by datetime limit #{page},10
+    </select>
+
+    <select id="pull_content" resultMap="Map" parameterType="com.example.demo.entity.Entertainment_news">
+        select id,source,title,datetime,content from entertainment_news where id=#{id}
+    </select>
+
+    <select id="pull_history" resultMap="Map" parameterType="com.example.demo.entity.Entertainment_news">
+        select e.id as id,source,title,datetime,img_url_1,img_url_2,img_url_3 from entertainment_news e inner join history h on e.id=h.id where account=#{account}
+    </select>
+
+    <select id="pull_attention" resultMap="Map" parameterType="com.example.demo.entity.Entertainment_news">
+        select e.id as id,source,title,datetime,img_url_1,img_url_2,img_url_3 from entertainment_news e inner join attention h on e.id=h.id where package_id=#{package_id}
+    </select>
+
+    <select id="pull_select" resultMap="Map" parameterType="com.example.demo.entity.Entertainment_news">
+        select id,source,title,datetime,img_url_1,img_url_2,img_url_3 from entertainment_news where title like #{key}
+    </select>
+
+    <select id="pull_all" resultMap="Map_tag" parameterType="com.example.demo.entity.Entertainment_news">
+        select id,tag1,tag1_weight,tag2,tag2_weight,tag3,tag3_weight,tag4,tag4_weight,tag5,tag5_weight,
                tag6,tag6_weight,tag7,tag7_weight,tag8,tag8_weight,tag9,tag9_weight,tag10,tag10_weight
         from entertainment_news
     </select>
+
     <update id="push_tag" parameterType="com.example.demo.entity.Tag">
-        update entertainment_news
-        set tag1=#{tag1},tag1_weight=#{tag1_weight},tag2=#{tag2},tag2_weight=#{tag2_weight},tag3=#{tag3},tag3_weight=#{tag3_weight},
-            tag4=#{tag4},tag4_weight=#{tag4_weight},tag5=#{tag5},tag5_weight=#{tag5_weight},tag6=#{tag6},tag6_weight=#{tag6_weight},
-            tag7=#{tag7},tag7_weight=#{tag7_weight},tag8=#{tag8},tag8_weight=#{tag8_weight},tag9=#{tag9},tag9_weight=#{tag9_weight},
-            tag10=#{tag10},tag10_weight=#{tag10_weight}
+        update entertainment_news set tag1=#{tag1},tag1_weight=#{tag1_weight},tag2=#{tag2},tag2_weight=#{tag2_weight},
+                                      tag3=#{tag3},tag3_weight=#{tag3_weight},tag4=#{tag4},tag4_weight=#{tag4_weight},
+                                      tag5=#{tag5},tag5_weight=#{tag5_weight},tag6=#{tag6},tag6_weight=#{tag6_weight},
+                                      tag7=#{tag7},tag7_weight=#{tag7_weight},tag8=#{tag8},tag8_weight=#{tag8_weight},
+                                      tag9=#{tag9},tag9_weight=#{tag9_weight},tag10=#{tag10},tag10_weight=#{tag10_weight}
         where id=#{id}
     </update>
-    <select id="pull_tag" resultType="com.example.demo.entity.Tag" parameterType="com.example.demo.entity.Tag">
-        SELECT id,tag1,tag1_weight,tag2,tag2_weight,tag3,tag3_weight,tag4,tag4_weight,tag5,tag5_weight,
-               tag6,tag6_weight,tag7,tag7_weight,tag8,tag8_weight,tag9,tag9_weight,tag10,tag10_weight
-        from entertainment_news
-        where id=#{id}
+
+    <select id="pull_tag" resultMap="Map_tag" parameterType="com.example.demo.entity.Tag">
+        select tag1, tag1_weight,tag2, tag2_weight,tag3, tag3_weight,tag4, tag4_weight,tag5, tag5_weight,
+               tag6, tag6_weight,tag7, tag7_weight,tag8, tag8_weight,tag9, tag9_weight,tag10, tag10_weight
+        from entertainment_news where id=#{id}
     </select>
-    <select id="pull_content" resultType="com.example.demo.entity.Entertainment_news" parameterType="com.example.demo.entity.Tag">
-        SELECT id,source,title,news_url,datetime,img_url_1,img_url_2,img_url_3,content
-        from entertainment_news
-        where id=#{id}
-    </select>
+
 </mapper>

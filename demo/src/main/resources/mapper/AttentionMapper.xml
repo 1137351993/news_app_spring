@@ -8,4 +8,7 @@
         values(#{id},#{account},#{package_id})
     </insert>
 
+    <select id="pull_package" resultType="com.example.demo.entity.Attention_package" parameterType="com.example.demo.entity.Attention_package">
+        select package_id,name from attention_package where account=#{account}
+    </select>
 </mapper>

@@ -21,7 +21,7 @@ public interface IEntertainment_newsDao {
 
     Entertainment_news[] pull_history(@Param("account") String account);
 
-    Entertainment_news[] pull_attention(@Param("account") String account);
+    Entertainment_news[] pull_attention(@Param("package_id") int package_id);
 
     Entertainment_news[] pull_select(@Param("key") String key);
 
