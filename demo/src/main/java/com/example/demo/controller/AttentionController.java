@@ -24,5 +24,8 @@ public class AttentionController {
        return attentionService.pull_package(account);
     }
 
-
+    @RequestMapping(value = "/pull_home_package", method = RequestMethod.POST)
+    private Attention_package[] pull_home_package(@RequestParam String account){
+        return attentionService.pull_home_package(account);
+    }
 }

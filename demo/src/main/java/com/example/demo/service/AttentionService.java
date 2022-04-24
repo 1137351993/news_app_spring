@@ -20,4 +20,6 @@ public class AttentionService {
 
     public Attention_package[] pull_package(String account){ return iAttentionDao.pull_package(account); }
 
+    public Attention_package[] pull_home_package(String account){ return iAttentionDao.pull_home_package(account); }
+
 }

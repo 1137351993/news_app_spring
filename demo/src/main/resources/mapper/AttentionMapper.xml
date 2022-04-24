@@ -11,4 +11,8 @@
     <select id="pull_package" resultType="com.example.demo.entity.Attention_package" parameterType="com.example.demo.entity.Attention_package">
         select package_id,name from attention_package where account=#{account}
     </select>
+
+    <select id="pull_home_package" resultType="com.example.demo.entity.Attention_package" parameterType="com.example.demo.entity.Attention_package">
+        select package_id,name from attention_package where account=#{account} and visual=1
+    </select>
 </mapper>

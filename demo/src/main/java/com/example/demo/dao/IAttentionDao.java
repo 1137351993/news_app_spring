@@ -9,4 +9,6 @@ public interface IAttentionDao {
     void push(@Param("id") String id, @Param("account") String source, @Param("package_id") int package_id);
 
     Attention_package[] pull_package(@Param("account") String account);
+
+    Attention_package[] pull_home_package(@Param("account") String account);
 }

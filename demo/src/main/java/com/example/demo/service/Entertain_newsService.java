@@ -37,6 +37,8 @@ public class Entertain_newsService {
 
     public Entertainment_news[] pull_attention(int package_id){ return ientertainment_newsDao.pull_attention(package_id);}
 
+    public Tag[] pull_attention_tag(String name, String account){ return ientertainment_newsDao.pull_attention_tag(name, account); }
+
     public Entertainment_news[] pull_select(String key){ return ientertainment_newsDao.pull_select(key);}
 
     public Tag[] pull_all(){ return ientertainment_newsDao.pull_all(); }

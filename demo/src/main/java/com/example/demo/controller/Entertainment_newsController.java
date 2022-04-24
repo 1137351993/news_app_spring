@@ -66,64 +66,89 @@ public class Entertainment_newsController {
     }
 
     @RequestMapping(value = "/compare", method = RequestMethod.POST)
-    private Entertainment_news[] compare(@RequestParam String id){
-        Tag tag0 = new Tag();
-        tag0=pull_tag(id);
+    private Entertainment_news[] compare(@RequestParam String name, @RequestParam String account){
+        Tag[] tags_attention = entertain_newsService.pull_attention_tag(name, account);
         Tag[] tags = entertain_newsService.pull_all();
 
-        List<Map.Entry<String, Double>> list0 = new ArrayList<>();
-        Map<String, Double> map0 = new HashMap<>();
-        map0.put(tag0.getTag1(), tag0.getTag1_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag2(), tag0.getTag2_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag3(), tag0.getTag3_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag4(), tag0.getTag4_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag5(), tag0.getTag5_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag6(), tag0.getTag6_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag7(), tag0.getTag7_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag8(), tag0.getTag8_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag9(), tag0.getTag9_weight());list0.add(getMax(map0));
-        map0.put(tag0.getTag10(), tag0.getTag10_weight());list0.add(getMax(map0));
-
-        double temp=0;
-        for(int i=0;i<list0.size();i++){
-            temp+=(list0.get(i).getValue());
-        }
-
+        double num=0;
         List<Map.Entry<String, Double>> list = new ArrayList<>();
 
-        for(int x=0;x<tags.length;x++){
-            List<Map.Entry<String, Double>> list1 = new ArrayList<>();
-            Map<String, Double> map1 = new HashMap<>();
-            map1.put(tags[x].getTag1(), tags[x].getTag1_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag2(), tags[x].getTag2_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag3(), tags[x].getTag3_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag4(), tags[x].getTag4_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag5(), tags[x].getTag5_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag6(), tags[x].getTag6_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag7(), tags[x].getTag7_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag8(), tags[x].getTag8_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag9(), tags[x].getTag9_weight());list1.add(getMax(map1));
-            map1.put(tags[x].getTag10(), tags[x].getTag10_weight());list1.add(getMax(map1));
+        for(int y=0;y<tags.length;y++) {
+            num=0;
+            List<Map.Entry<String, Double>> list0 = new ArrayList<>();
+            Map<String, Double> map0 = new HashMap<>();
+            map0.put(tags[y].getTag1(), tags[y].getTag1_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag2(), tags[y].getTag2_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag3(), tags[y].getTag3_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag4(), tags[y].getTag4_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag5(), tags[y].getTag5_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag6(), tags[y].getTag6_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag7(), tags[y].getTag7_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag8(), tags[y].getTag8_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag9(), tags[y].getTag9_weight());
+            list0.add(getMax(map0));
+            map0.put(tags[y].getTag10(), tags[y].getTag10_weight());
+            list0.add(getMax(map0));
 
-            double temp2=0;
-            for(int i=0;i<list1.size();i++){
-                temp2+=(list1.get(i).getValue());
+            double temp = 0;
+            for (int i = 0; i < list0.size(); i++) {
+                temp += (list0.get(i).getValue());
             }
 
-            double fenzi=0, fenmu=0;
-            for(int i=0;i<10;i++){
-                for(int j=0;j<10;j++){
-                    if(list0.get(i).getKey().equals(list1.get(j).getKey())){
-                        fenzi+=((list0.get(i).getValue())*(list1.get(j).getValue()));
+
+            for (int x = 0; x < tags_attention.length; x++) {
+                List<Map.Entry<String, Double>> list1 = new ArrayList<>();
+                Map<String, Double> map1 = new HashMap<>();
+                map1.put(tags_attention[x].getTag1(), tags_attention[x].getTag1_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag2(), tags_attention[x].getTag2_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag3(), tags_attention[x].getTag3_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag4(), tags_attention[x].getTag4_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag5(), tags_attention[x].getTag5_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag6(), tags_attention[x].getTag6_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag7(), tags_attention[x].getTag7_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag8(), tags_attention[x].getTag8_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag9(), tags_attention[x].getTag9_weight());
+                list1.add(getMax(map1));
+                map1.put(tags_attention[x].getTag10(), tags_attention[x].getTag10_weight());
+                list1.add(getMax(map1));
+
+                double temp2 = 0;
+                for (int i = 0; i < list1.size(); i++) {
+                    temp2 += (list1.get(i).getValue());
+                }
+
+                double fenzi = 0, fenmu = 0;
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        if (list0.get(i).getKey().equals(list1.get(j).getKey())) {
+                            fenzi += ((list0.get(i).getValue()) * (list1.get(j).getValue()));
+                        }
                     }
                 }
+                fenmu = sqrt(temp * temp2);
+                num += (fenzi / fenmu);
             }
-            fenmu=sqrt(temp*temp2);
-            double end=fenzi/fenmu;
-            if(end!=0.0) {
-                System.out.println("\n相似度：" + fenzi / fenmu + "\n");
+            double end = num / tags_attention.length;
+            if (end > 0.03) {
+                System.out.println("\n相似度：" + end + "\n");
                 Map<String, Double> map = new HashMap<>();
-                map.put(tags[x].getId(), end);
+                map.put(tags[y].getId(), end);
                 list.add(getMax(map));
             }
         }

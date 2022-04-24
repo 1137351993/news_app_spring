@@ -23,6 +23,8 @@ public interface IEntertainment_newsDao {
 
     Entertainment_news[] pull_attention(@Param("package_id") int package_id);
 
+    Tag[] pull_attention_tag(@Param("name") String name, @Param("account") String account);
+
     Entertainment_news[] pull_select(@Param("key") String key);
 
     Tag[] pull_all();
