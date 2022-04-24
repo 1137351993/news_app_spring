@@ -156,8 +156,8 @@ public class login extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    Toast toast= Toast.makeText(login.this, temp, Toast.LENGTH_SHORT);
-                    toast.show();
+//                    Toast toast= Toast.makeText(login.this, temp, Toast.LENGTH_SHORT);
+//                    toast.show();
                     et_qqpwd.setText("");
                     login_text.setVisibility(View.VISIBLE);
                 }

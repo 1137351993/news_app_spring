@@ -19,6 +19,7 @@ import com.example.gotitapplication.ContentActivity;
 import com.example.gotitapplication.R;
 import com.example.gotitapplication.gson.News;
 import com.example.gotitapplication.gson.NewsList;
+import com.example.gotitapplication.login.login;
 import com.example.gotitapplication.util.HttpUtil;
 import com.example.gotitapplication.util.Utility;
 
@@ -44,8 +45,8 @@ public class TabFragment extends Fragment {
 
     private static final int ITEM_SOCIETY = 1;
     private static final int ITEM_COUNTY = 2;
-//    private static final int ITEM_INTERNATION = 3;
-//    private static final int ITEM_FUN = 4;
+    private static final int ITEM_INTERNATION = 3;
+    private static final int ITEM_FUN = 4;
 //    private static final int ITEM_SPORT = 5;
 //    private static final int ITEM_NBA = 6;
 //    private static final int ITEM_FOOTBALL = 7;
@@ -83,6 +84,7 @@ public class TabFragment extends Fragment {
         refreshLayout.setColorSchemeColors(getResources().getColor(R.color.purple_200));
         listView = (ListView) view.findViewById(R.id.list_view);
         adapter = new TitleAdapter(getContext(), R.layout.list_view_item, titleList);
+
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             Intent intent = new Intent(getContext(), ContentActivity.class);
@@ -104,13 +106,26 @@ public class TabFragment extends Fragment {
             public void onRefresh() {
                 refreshLayout.setRefreshing(true);
                 itemName = parseString(mTitle);
-                pull();
+                Toast toast= Toast.makeText(view.getContext(), "temp:"+mTitle, Toast.LENGTH_SHORT);
+                toast.show();
+                if(itemName!=0)
+                    pull();
+                else{
+                    pull_attention();
+                }
             }
         });
 
         refreshLayout.setRefreshing(true);
         itemName = parseString(mTitle);
-        pull();
+        Toast toast= Toast.makeText(view.getContext(), "temp:"+mTitle, Toast.LENGTH_SHORT);
+        toast.show();
+        if(itemName!=0)
+            pull();
+        else{
+
+            pull_attention();
+        }
 
         return view;
     }
@@ -241,15 +256,19 @@ public class TabFragment extends Fragment {
         if (text.equals("社会新闻")){
             return ITEM_SOCIETY;
         }
-        if (text.equals("国内新闻")){
+        else if (text.equals("国内新闻")){
             return ITEM_COUNTY;
         }
-//        if (text.equals("国际新闻")){
-//            return ITEM_INTERNATION;
-//        }
-//        if (text.equals("娱乐新闻")){
-//            return ITEM_FUN;
-//        }
+        if (text.equals("国际新闻")){
+            return ITEM_INTERNATION;
+        }
+        if (text.equals("娱乐新闻")){
+            return ITEM_FUN;
+        }
+        else{
+            return 0;
+        }
+//
 //        if (text.equals("体育新闻")){
 //            return ITEM_SPORT;
 //        }
@@ -292,7 +311,6 @@ public class TabFragment extends Fragment {
 //        if (text.equals("IT资讯")){
 //            return ITEM_IT;
 //        }
-        return ITEM_SOCIETY;
     }
 
     private void pull(){
@@ -306,6 +324,55 @@ public class TabFragment extends Fragment {
                     OkHttpClient client = new OkHttpClient(); //创建http客户端
                     Request request = new Request.Builder()
                             .url(url) //后端请求接口的地址
+                            .post(params.build())
+                            .build(); //创建http请求
+                    Response response = client.newCall(request).execute(); //执行发送指令
+                    //获取后端回复过来的返回值(如果有的话)
+                    String responseData = response.body().string(); //获取后端接口返回过来的JSON格式的结果
+                    JSONArray jsonArray = new JSONArray(responseData); //将文本格式的JSON转换为JSON数组
+                    titleList.clear();
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String id=jsonObject.getString("id");
+                        String title=jsonObject.getString("title");
+                        String description=jsonObject.getString("source");
+                        String imageurl=jsonObject.getString("img_url_2");
+
+                        Title title1 = new Title(id, title, description, imageurl);
+                        titleList.add(title1);
+                    }
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.notifyDataSetChanged();
+                            listView.setSelection(0);
+                            refreshLayout.setRefreshing(false);
+                        };
+                    });
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try  {
+            thread.join();
+        }  catch  ( InterruptedException e) {
+            e . printStackTrace () ;
+        }
+    }
+
+    private void pull_attention(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() { //类型2——Param型
+                try {
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("name",mTitle);
+                    params.add("account",account);
+                    OkHttpClient client = new OkHttpClient(); //创建http客户端
+                    Request request = new Request.Builder()
+                            .url("http://10.0.2.2:8989/entertain_news/compare") //后端请求接口的地址
                             .post(params.build())
                             .build(); //创建http请求
                     Response response = client.newCall(request).execute(); //执行发送指令

@@ -54,7 +54,7 @@ public class attention extends AppCompatActivity {
         lol_hero_list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(mContext, "你点击了：" + titleList.get(groupPosition).get(childPosition).getTitle(), Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "你点击了：" + titleList.get(groupPosition).get(childPosition).getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
