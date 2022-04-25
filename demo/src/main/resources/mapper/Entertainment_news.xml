@@ -29,9 +29,10 @@
     </select>
 
     <select id="pull_attention_tag" resultMap="Map_tag" parameterType="com.example.demo.entity.Tag">
-        select e.id as id,tag1,tag1_weight,tag2,tag2_weight,tag3,tag3_weight,tag4,tag4_weight,tag5,tag5_weight,
+        select c.id as id,tag1,tag1_weight,tag2,tag2_weight,tag3,tag3_weight,tag4,tag4_weight,tag5,tag5_weight,
                tag6,tag6_weight,tag7,tag7_weight,tag8,tag8_weight,tag9,tag9_weight,tag10,tag10_weight
-        from entertainment_news e inner join attention h on e.id=h.id where name=#{name} and account=#{account}
+        FROM attention a inner join attention_package b on a.package_id=b.package_id
+                         inner join entertainment_news c on a.id=c.id where b.name=#{name} and b.account=#{account}
     </select>
 
     <select id="pull_select" resultMap="Map" parameterType="com.example.demo.entity.Entertainment_news">
