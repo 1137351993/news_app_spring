@@ -24,7 +24,7 @@ public class Entertainment_newsController {
         entertain_newsService.push(entertainment_news.getId(), entertainment_news.getSource(),
                 entertainment_news.getTitle(), entertainment_news.getNews_url(), entertainment_news.getDatetime(),
                 entertainment_news.getImg_url_1(), entertainment_news.getImg_url_2(),
-                entertainment_news.getImg_url_3());
+                entertainment_news.getImg_url_3(), entertainment_news.getType());
     }
 
     @RequestMapping(value = "/push_content", method = RequestMethod.POST)

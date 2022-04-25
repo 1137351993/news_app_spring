@@ -11,7 +11,15 @@ public class Entertainment_news {
     private String img_url_2;
     private String img_url_3;
     private String content;
+    private int type;
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public String getContent() {
         return content;

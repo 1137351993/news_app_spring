@@ -17,8 +17,8 @@ public class Entertain_newsService {
     private IEntertainment_newsDao ientertainment_newsDao;
 
     public void push(String id, String source, String title, String news_url, String datetime,
-                     String img_url_1, String img_url_2, String img_url_3) {
-        ientertainment_newsDao.push(id, source, title, news_url, datetime, img_url_1, img_url_2, img_url_3);
+                     String img_url_1, String img_url_2, String img_url_3, int type) {
+        ientertainment_newsDao.push(id, source, title, news_url, datetime, img_url_1, img_url_2, img_url_3, type);
     }
 
     public void push_content(String id, String content){

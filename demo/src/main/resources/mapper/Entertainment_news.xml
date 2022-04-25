@@ -4,8 +4,8 @@
     <resultMap id="Map" type="com.example.demo.entity.Entertainment_news"></resultMap>
     <resultMap id="Map_tag" type="com.example.demo.entity.Tag"></resultMap>
     <insert id="push" parameterType="com.example.demo.entity.Entertainment_news">
-        insert into entertainment_news (id, source, title, news_url, datetime, img_url_1, img_url_2, img_url_3)
-        values(#{id},#{source},#{title},#{news_url},#{datetime},#{img_url_1},#{img_url_2},#{img_url_3})
+        insert into entertainment_news (id, source, title, news_url, datetime, img_url_1, img_url_2, img_url_3, type)
+        values(#{id},#{source},#{title},#{news_url},#{datetime},#{img_url_1},#{img_url_2},#{img_url_3},#{type})
     </insert>
 
     <update id="push_content" parameterType="com.example.demo.entity.Entertainment_news">

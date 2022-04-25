@@ -11,7 +11,7 @@ public interface IEntertainment_newsDao {
     void push(@Param("id") String id, @Param("source") String source, @Param("title") String title,
               @Param("news_url") String news_url, @Param("datetime") String datetime,
               @Param("img_url_1") String img_url_1, @Param("img_url_2") String img_url_2,
-              @Param("img_url_3") String img_url_3);
+              @Param("img_url_3") String img_url_3, @Param("type") int type);
 
     void push_content(@Param("id") String id, @Param("content") String content);
 
